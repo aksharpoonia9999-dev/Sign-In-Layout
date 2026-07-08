@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign-In-Layout</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      * {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        box-sizing: border-box;
+        text-decoration: none;
+      }
+      section {
+        min-height: 100vh;
+        width: 100%;
+        background-image: url(sign-in-layout-img/background.png);
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+      }
+      .col-6-left {
+        width: 50%;
+        display: flex;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        flex-grow: 1;
+      }
+      .logo {
+        display: flex;
+      }
+      .logo-img {
+        height: 48px;
+        width: 276px;
+      }
+      .sign-in-form {
+        display: flex;
+        justify-content: center;
+        max-width: 340px;
+        flex-direction: column;
+      }
+      .box {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .heading {
+        font-size: 32px;
+        font-weight: 600;
+        line-height: 135%;
+        font-family: "Poppins", sans-serif;
+        color: rgba(3, 7, 18, 1);
+        margin: 48px 0 10px 0;
+        user-select: none;
+      }
+      .para {
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        color: rgba(98, 101, 109, 1);
+        margin-bottom: 32px;
+        user-select: none;
+      }
+      .register a {
+        color: rgba(37, 99, 235, 1);
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        transition: all 500ms;
+      }
+      .register a:hover {
+        color: rgb(0, 162, 255);
+      }
+      .form {
+        display: flex;
+      }
+      .email-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 340px;
+        height: 44px;
+        border-radius: 6px;
+        border: 1px solid rgba(228, 234, 247, 1);
+        background-color: rgba(245, 248, 255, 1);
+        padding: 10px 16px;
+      }
+      #mail {
+        width: 340px;
+        height: 40px;
+        border: none;
+        background-color: rgba(245, 248, 255, 1);
+      }
+      .password-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 340px;
+        height: 44px;
+        border-radius: 6px;
+        border: 1px solid rgba(228, 234, 247, 1);
+        background-color: rgba(245, 248, 255, 1);
+        padding: 10px 16px;
+        margin-top: 10px;
+      }
+      #pass {
+        width: 340px;
+        height: 40px;
+        border: none;
+        background-color: rgba(245, 248, 255, 1);
+      }
+      .middle-box {
+        display: flex;
+        margin-top: 12px;
+        justify-content: space-between;
+        align-items: center;
+      }
+      label {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        font-family: "Lato", sans-serif;
+        color: rgba(98, 101, 109, 1);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        user-select: none;
+      }
+      .forgot {
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        color: rgba(98, 101, 109, 1);
+        transition: all 500ms ease;
+      }
+      .forgot:hover {
+        color: rgba(37, 99, 235, 1);
+      }
+      .blob-btn-fill {
+        position: relative;
+        padding: 16px 36px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        overflow: hidden;
+        z-index: 1;
+        width: 340px;
+        height: 48px;
+        background: linear-gradient(83.67deg, #2194ff 10.02%, #2563eb 90.05%);
+        color: white;
+        margin-top: 24px;
+        transition: color 0.4s ease;
+      }
+      .blob-btn-fill .btn-text {
+        position: relative;
+        z-index: 3;
+        transition: all 0.4s ease;
+      }
+      .blob-btn-fill .blob-container {
+        position: absolute;
+        inset: 2px;
+        overflow: hidden;
+        border-radius: 50px;
+        display: flex;
+        z-index: 2;
+      }
+      .blob-btn-fill .blob {
+        flex: 1;
+        background: #fff;
+        border-radius: 50%;
+        transform: scale(0) translateY(100%);
+        transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .blob-btn-fill .blob:nth-child(2) {
+        transition-delay: 0.1s;
+      }
+      .blob-btn-fill .blob:nth-child(3) {
+        transition-delay: 0.2s;
+      }
+      .blob-btn-fill .blob:nth-child(4) {
+        transition-delay: 0.3s;
+      }
+      .blob-btn-fill .blob:nth-child(5) {
+        transition-delay: 0.4s;
+      }
+      .blob-btn-fill .blob:nth-child(6) {
+        transition-delay: 0.5s;
+      }
+      .blob-btn-fill:hover .blob {
+        transform: scale(1.6) translateY(0);
+      }
+      .blob-btn-fill:hover .btn-text {
+        background: linear-gradient(83.67deg, #2194ff 10.02%, #2563eb 90.05%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+      }
+      .divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 340px;
+        margin: 16px 0 20px 0;
+        user-select: none;
+      }
+      .divider hr {
+        flex: 1;
+        border-top: 1px solid rgba(201, 207, 219, 1);
+      }
+      .divider span {
+        color: rgba(145, 151, 166, 1);
+        font-size: 14px;
+        white-space: nowrap;
+        font-family: "Lato", sans-serif;
+      }
+      .buttons {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 110px;
+      }
+      .google {
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        color: rgba(98, 101, 109, 1);
+        display: flex;
+        padding: 10px 16px;
+        gap: 10px;
+        background-color: white;
+        width: 166px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(228, 234, 247, 1);
+        border-radius: 6px;
+      }
+      .google,
+      .facebook {
+        transition: all 0.3s ease;
+      }
+      .google:hover,
+      .facebook:hover {
+        transform: translateY(-2px);
+
+        box-shadow:
+          0 4px 8px rgba(33, 148, 255, 0.15),
+          0 8px 18px rgba(37, 99, 235, 0.2),
+          0 0 12px rgba(33, 148, 255, 0.18);
+      }
+      .facebook {
+        font-family: "Lato", sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+        color: rgba(98, 101, 109, 1);
+        display: flex;
+        padding: 10px 16px;
+        gap: 10px;
+        background-color: white;
+        width: 166px;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgba(228, 234, 247, 1);
+        border-radius: 6px;
+      }
+      .col-6-right {
+        width: 50%;
+        min-height: 100vh;
+        position: relative;
+        background-image: url(sign-in-layout-img/right-side.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+      .middle-design {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+      }
+      .post {
+        position: absolute;
+        left: 48%;
+        z-index: 1;
+      }
+      .connect {
+        position: absolute;
+        top: 18%;
+        left: 10%;
+      }
+      .icons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 85%;
+        top: 14%;
+        gap: 40px;
+      }
+      .fb-link {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+      }
+      .ig-twt {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .fb-img {
+        width: 64px;
+        height: 64px;
+        transform: all 800ms ease;
+      }
+      .fb-img:hover {
+        transform: translateY(-2px);
+      }
+      .linkedin {
+        width: 64px;
+        height: 64px;
+        transform: all 800ms ease;
+      }
+      .linkedin:hover {
+        transform: translateY(-2px);
+      }
+      .twitter {
+        width: 64px;
+        height: 64px;
+        transform: all 800ms ease;
+      }
+      .twitter:hover {
+        transform: translateY(-2px);
+      }
+      .instagram {
+        width: 64px;
+        height: 64px;
+        transform: all 800ms ease;
+      }
+      .instagram:hover {
+        transform: translateY(-2px);
+      }
+      @media (max-width: 1024px) {
+        .circle {
+          width: 450px;
+          height: 450px;
+        }
+        .post {
+          width: 235px;
+          height: 235px;
+        }
+        .connect {
+          width: 210px;
+          height: 325px;
+        }
+        .fb-img {
+          width: 62px;
+          height: 62px;
+        }
+        .linkedin {
+          width: 62px;
+          height: 62px;
+        }
+        .instagram {
+          width: 62px;
+          height: 62px;
+        }
+        .twitter {
+          width: 62px;
+          height: 62px;
+        }
+      }
+      @media (max-width: 992px) {
+        .circle {
+          width: 380px;
+          height: 380px;
+        }
+        .post {
+          width: 200px;
+          height: 200px;
+        }
+        .connect {
+          height: 280px;
+          width: 200px;
+        }
+        .fb-link {
+          gap: 18px;
+        }
+        .icons {
+          gap: 30px;
+        }
+        .ig-twt {
+          gap: 23px;
+        }
+      }
+      @media (max-width: 768px) {
+        .circle {
+          width: 370px;
+          height: 370px;
+        }
+        .post {
+          width: 190px;
+          height: 190px;
+        }
+        .connect {
+          width: 190px;
+          height: 260px;
+        }
+        .fb-img {
+          height: 58px;
+          width: 58px;
+        }
+        .linkedin {
+          height: 58px;
+          width: 58px;
+        }
+        .twitter {
+          height: 58px;
+          width: 58px;
+        }
+        .instagram {
+          height: 58px;
+          width: 58px;
+        }
+        .icons {
+          top: 13%;
+          gap: 31px;
+        }
+        .fb-link {
+          gap: 20px;
+        }
+        .ig-twt {
+          gap: 20px;
+        }
+      }
+      @media (max-width: 760px) {
+        section {
+          flex-direction: column;
+        }
+        .col-6-left,
+        .col-6-right {
+          width: 100%;
+        }
+      }
+      @media (max-width: 425px) {
+        section {
+          display: block;
+        }
+        .col-6-left,
+        .col-6-right {
+          width: 100%;
+          padding: 10px;
+        }
+      }
+      @media (max-width: 375px) {
+        .heading {
+          margin-top: 30px;
+        }
+        .email-box {
+          width: 330px;
+        }
+        .password-box {
+          width: 330px;
+        }
+        .middle-box {
+          width: 330px;
+        }
+        .blob-btn-fill {
+          width: 330px;
+        }
+        .divider {
+          width: 330px;
+        }
+        .buttons {
+          width: 330px;
+        }
+        .circle {
+          width: 360px;
+          height: 360px;
+        }
+        .post {
+          width: 185px;
+          height: 185px;
+        }
+        .connect {
+          width: 185px;
+          height: 245px;
+        }
+        .fb-link {
+          gap: 18px;
+        }
+        .icons {
+          gap: 28px;
+        }
+        .ig-twt {
+          gap: 17px;
+        }
+        .fb-img,
+        .linkedin,
+        .twitter,
+        .instagram {
+          width: 54px;
+          height: 54px;
+        }
+      }
+      @media (max-width: 360px) {
+        .post {
+          width: 160px;
+          height: 160px;
+        }
+        .circle {
+          height: 310px;
+          width: 310px;
+        }
+        .connect {
+          height: 210px;
+          width: 140px;
+        }
+        .fb-link {
+          gap: 8px;
+        }
+        .ig-twt {
+          gap: 10px;
+        }
+        .icons {
+          gap: 15px;
+        }
+        .heading {
+          font-size: 30px;
+        }
+        .para {
+          font-size: 13px;
+        }
+        .email-box {
+          width: 310px;
+        }
+        .password-box {
+          width: 310px;
+        }
+        .middle-box {
+          width: 310px;
+        }
+        .blob-btn-fill {
+          width: 310px;
+        }
+        .divider {
+          width: 310px;
+        }
+        .buttons {
+          width: 310px;
+        }
+      }
+      @media (max-width: 320px) {
+        .heading {
+          margin-top: 25px;
+        }
+        .para {
+          margin-bottom: 25px;
+        }
+        .email-box {
+          width: 300px;
+        }
+        .password-box {
+          width: 300px;
+        }
+        .middle-box {
+          width: 300px;
+        }
+        .blob-btn-fill {
+          width: 300px;
+          margin-top: 16px;
+        }
+        .divider {
+          width: 300px;
+          margin: 14px 0 16px 0;
+        }
+        .buttons {
+          width: 300px;
+        }
+        .circle {
+          width: 300px;
+          height: 300px;
+        }
+        .post {
+          width: 160px;
+          height: 160px;
+        }
+        .connect {
+          width: 160px;
+          height: 210px;
+        }
+        .fb-link {
+          gap: 11px;
+        }
+        .icons {
+          gap: 20px;
+        }
+        .ig-twt {
+          gap: 15px;
+        }
+        .fb-img,
+        .linkedin,
+        .twitter,
+        .instagram {
+          width: 50px;
+          height: 50px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="col-6-left">
+        <div class="logo">
+          <a class="logo-top" href=""
+            ><img class="logo-img" src="sign-in-layout-img/logo.png" alt=""
+          /></a>
+        </div>
+        <div class="sign-in-form">
+          <div class="box">
+            <h1 class="heading">Sign in</h1>
+            <p class="para">
+              Don't have an account?
+              <span class="register"><a href="">Register here</a></span>
+            </p>
+          </div>
+          <div class="form">
+            <form action="">
+              <div class="email-box">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 3H15C15.825 3 16.5 3.675 16.5 4.5V13.5C16.5 14.325 15.825 15 15 15H3C2.175 15 1.5 14.325 1.5 13.5V4.5C1.5 3.675 2.175 3 3 3Z"
+                    stroke="#9197A6"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M16.5 4.5L9 9.75L1.5 4.5"
+                    stroke="#9197A6"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <input
+                  required
+                  type="email"
+                  name=""
+                  id="mail"
+                  placeholder="Email"
+                />
+              </div>
+              <div class="password-box">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_122318_42)">
+                    <path
+                      d="M14.25 8.25H3.75C2.92157 8.25 2.25 8.92157 2.25 9.75V15C2.25 15.8284 2.92157 16.5 3.75 16.5H14.25C15.0784 16.5 15.75 15.8284 15.75 15V9.75C15.75 8.92157 15.0784 8.25 14.25 8.25Z"
+                      stroke="#9197A6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.25 8.25V5.25C5.25 4.25544 5.64509 3.30161 6.34835 2.59835C7.05161 1.89509 8.00544 1.5 9 1.5C9.99456 1.5 10.9484 1.89509 11.6517 2.59835C12.3549 3.30161 12.75 4.25544 12.75 5.25V8.25"
+                      stroke="#9197A6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_122318_42">
+                      <rect width="18" height="18" rx="6" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+
+                <input
+                  required
+                  type="password"
+                  name=""
+                  id="pass"
+                  placeholder="Password"
+                />
+                <svg
+                  style="cursor: pointer"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_122318_50)">
+                    <path
+                      d="M7.00658 14.0865L5.55833 13.698L6.14858 11.4938C5.26506 11.1679 4.44392 10.693 3.72083 10.0898L2.10608 11.7053L1.04483 10.644L2.66033 9.02927C1.74839 7.93709 1.13565 6.62684 0.88208 5.22677L2.35808 4.95752C2.92733 8.10902 5.68433 10.5 9.00008 10.5C12.3151 10.5 15.0728 8.10902 15.6421 4.95752L17.1181 5.22602C16.8649 6.62628 16.2524 7.9368 15.3406 9.02927L16.9553 10.644L15.8941 11.7053L14.2793 10.0898C13.5562 10.693 12.7351 11.1679 11.8516 11.4938L12.4418 13.6988L10.9936 14.0865L10.4026 11.8815C9.47435 12.0406 8.52582 12.0406 7.59758 11.8815L7.00658 14.0865Z"
+                      fill="#9197A6"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_122318_50">
+                      <rect width="18" height="18" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div class="middle-box">
+                <label for="remember">
+                  <input
+                    style="height: 14px; width: 14px; border-radius: 2px"
+                    type="checkbox"
+                    name=""
+                    id="remember"
+                  />
+                  Remember Me
+                </label>
+                <a href=""><p class="forgot">Forgot Password?</p></a>
+              </div>
+              <div class="btn-border">
+                <button class="blob-btn-fill">
+                  <span class="btn-text">Sign in</span>
+                  <span class="blob-container">
+                    <span class="blob"></span>
+                    <span class="blob"></span>
+                    <span class="blob"></span>
+                    <span class="blob"></span>
+                    <span class="blob"></span>
+                    <span class="blob"></span>
+                  </span>
+                </button>
+              </div>
+              <div class="form-end">
+                <div class="divider">
+                  <hr />
+                  <span>or continue with</span>
+                  <hr />
+                </div>
+                <div class="buttons">
+                  <a
+                    class="google"
+                    href="https://accounts.google.com/AccountChooser"
+                    target="_blank"
+                    ><svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M19.5999 10.2219C19.5999 9.3997 19.5332 8.7997 19.3888 8.17749H10V11.8885H15.511C15.4 12.8108 14.8 14.1997 13.4666 15.1329L13.4479 15.2572L16.4165 17.5569L16.6222 17.5774C18.511 15.833 19.5999 13.2663 19.5999 10.2219Z"
+                        fill="#4285F4"
+                      />
+                      <path
+                        d="M10.0002 19.9999C12.7001 19.9999 14.9668 19.111 16.6224 17.5777L13.4668 15.1333C12.6224 15.7221 11.489 16.1333 10.0002 16.1333C7.35578 16.1333 5.11137 14.3889 4.3113 11.9778L4.19403 11.9877L1.10726 14.3766L1.06689 14.4888C2.71131 17.7555 6.08908 19.9999 10.0002 19.9999Z"
+                        fill="#34A853"
+                      />
+                      <path
+                        d="M4.31104 11.9777C4.09994 11.3555 3.97776 10.6888 3.97776 9.99995C3.97776 9.31102 4.09994 8.64438 4.29993 8.02217L4.29434 7.88966L1.16889 5.4624L1.06663 5.51104C0.388891 6.86661 0 8.38885 0 9.99995C0 11.611 0.388891 13.1332 1.06663 14.4888L4.31104 11.9777Z"
+                        fill="#FBBC05"
+                      />
+                      <path
+                        d="M10.0002 3.86662C11.8779 3.86662 13.1446 4.67772 13.8668 5.35554L16.689 2.59998C14.9557 0.988887 12.7001 0 10.0002 0C6.08908 0 2.71131 2.24441 1.06689 5.51103L4.30019 8.02216C5.11137 5.61107 7.35579 3.86662 10.0002 3.86662Z"
+                        fill="#EB4335"
+                      />
+                    </svg>
+                    Google</a
+                  >
+                  <a
+                    class="facebook"
+                    href="https://www.facebook.com/"
+                    target="_blank"
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <g clip-path="url(#clip0_49789_3111)">
+                        <path
+                          d="M20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 14.9913 3.65686 19.1283 8.4375 19.8785V12.8906H5.89844V10H8.4375V7.79688C8.4375 5.29062 9.93044 3.90625 12.2146 3.90625C13.3087 3.90625 14.4531 4.10156 14.4531 4.10156V6.5625H13.1921C11.9499 6.5625 11.5625 7.33333 11.5625 8.12417V10H14.3359L13.8926 12.8906H11.5625V19.8785C16.3431 19.1283 20 14.9913 20 10Z"
+                          fill="#1877F2"
+                        />
+                        <path
+                          d="M13.8926 12.8906L14.3359 10H11.5625V8.12417C11.5625 7.33333 11.9499 6.5625 13.1921 6.5625H14.4531V4.10156C14.4531 4.10156 13.3087 3.90625 12.2146 3.90625C9.93044 3.90625 8.4375 5.29062 8.4375 7.79688V10H5.89844V12.8906H8.4375V19.8785C9.47287 20.0405 10.5271 20.0405 11.5625 19.8785V12.8906H13.8926Z"
+                          fill="white"
+                        />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_49789_3111">
+                          <rect width="20" height="20" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+                    Facebook
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-6-right">
+        <div class="bg">
+          <div class="middle-design">
+            <div class="circle">
+              <img class="circle" src="sign-in-layout-img/Circle.png" alt="" />
+              <img src="sign-in-layout-img/post.png" alt="" class="post" />
+              <img src="sign-in-layout-img/Union.png" alt="" class="connect" />
+              <div class="icons">
+                <div class="fb-link">
+                  <a target="_blank" href="https://www.facebook.com/">
+                    <img
+                      src="sign-in-layout-img/facebook.png"
+                      alt=""
+                      class="fb-img"
+                    />
+                  </a>
+                  <a target="_blank" href="https://in.linkedin.com/">
+                    <img
+                      src="sign-in-layout-img/linkedin.png"
+                      alt=""
+                      class="linkedin"
+                    />
+                  </a>
+                </div>
+                <div class="ig-twt">
+                  <a target="_blank" href="https://www.instagram.com/?hl=en">
+                    <img
+                      src="sign-in-layout-img/instagram.png"
+                      alt=""
+                      class="instagram"
+                    />
+                  </a>
+                  <a target="_blank" href="https://x.com/">
+                    <img
+                      src="sign-in-layout-img/twitter.png"
+                      alt=""
+                      class="twitter"
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
